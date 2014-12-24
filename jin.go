@@ -2,13 +2,21 @@ package main
 
 import (
 	"encoding/json"
+	"flag"
 	"fmt"
 	"io/ioutil"
 	"os"
 )
 
 func main() {
-	bytes, _ := ioutil.ReadAll(os.Stdin)
+	var file = flag.String("f", "", "-f=file")
+	flag.Parse()
+	var bytes []byte
+	if file == nil {
+		bytes, _ = ioutil.ReadAll(os.Stdin)
+	} else {
+		bytes, _ = ioutil.ReadFile(*file)
+	}
 	var j interface{}
 	err := json.Unmarshal(bytes, &j)
 	if err != nil {
