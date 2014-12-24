@@ -12,7 +12,7 @@ func main() {
 	var file = flag.String("f", "", "-f=file")
 	flag.Parse()
 	var bytes []byte
-	if file == nil {
+	if len(*file) == 0 {
 		bytes, _ = ioutil.ReadAll(os.Stdin)
 	} else {
 		bytes, _ = ioutil.ReadFile(*file)
